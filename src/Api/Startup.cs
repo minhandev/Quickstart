@@ -24,6 +24,14 @@ namespace Api
                         ValidateAudience = false
                     };
                 });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiScope", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "api1");
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -35,7 +43,8 @@ namespace Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+                    .RequireAuthorization("ApiScope");
             });
         }
     }

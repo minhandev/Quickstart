@@ -21,25 +21,25 @@ namespace IdentityServer
                 new ApiScope("api1", "My API")
             };
 
-public static IEnumerable<Client> Clients =>
-    new List<Client>
-    {
-        new Client
-        {
-            ClientId = "client",
-
-            // no interactive user, use the clientid/secret for authentication
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-            // secret for authentication
-            ClientSecrets =
+        public static IEnumerable<Client> Clients =>
+            new List<Client>
             {
-                new Secret("secret".Sha256())
-            },
+                new Client
+                {
+                    ClientId = "client",
 
-            // scopes that client has access to
-            AllowedScopes = { "api1" }
-        }
-    };
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    // scopes that client has access to
+                    AllowedScopes = { "api1" }
+                }
+            };
     }
 }

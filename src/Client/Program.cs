@@ -28,9 +28,9 @@ namespace Client
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,
+
                 ClientId = "client",
                 ClientSecret = "secret",
-
                 Scope = "api1"
             });
 
@@ -41,6 +41,7 @@ namespace Client
             }
 
             Console.WriteLine(tokenResponse.Json);
+
             Console.WriteLine("\n\n");
 
             // call api
@@ -55,8 +56,7 @@ namespace Client
             else
             {
                 var content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(
-                    .Parse(content));
+                Console.WriteLine(JArray.Parse(content));
             }
         }
     }
